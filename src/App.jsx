@@ -1,16 +1,20 @@
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom'; // useNavigate যোগ করা হয়েছে
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Admission from './pages/Admission'; 
 import Footer from './components/Footer';
-import Funds from './pages/funds'; 
+
+// ফাইলের নাম অনুযায়ী এখানে বড় হাতের 'Funds' ব্যবহার করা হয়েছে
+import Funds from './pages/Funds'; 
+
+// আপনার ফোল্ডার পাথ অনুযায়ী এটি চেক করে নিন
 import MadrashaFundDashboard from './components/funds/MadrashaFundDashboard';
-import useMadrashaStore from './lib/store'; // স্টোর ইমপোর্ট করুন
+import useMadrashaStore from './lib/store';
 
 function App() {
   const navigate = useNavigate();
-  const { addFund } = useMadrashaStore(); // স্টোর থেকে addFund নিন
+  const { addFund, deleteFund, updateFund } = useMadrashaStore(); 
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -23,18 +27,19 @@ function App() {
           {/* ফান্ডের মেইন রাউট */}
           <Route path="/funds" element={<Funds />} />
           
-          {/* ড্যাশবোর্ড রাউট: এখানে প্রপসগুলো পাস করা হয়েছে */}
+          {/* ড্যাশবোর্ড রাউট */}
           <Route 
             path="/funds/admin" 
             element={
               <MadrashaFundDashboard 
-                onBack={() => navigate('/funds')} // ব্যাকে টিপ দিলে ফান্ড পেজে যাবে
-                onCreateFund={addFund}           // স্টোরের ফাংশনটি পাস করা হলো
+                onBack={() => navigate('/funds')} 
+                onCreateFund={addFund}
+                onDeleteFund={deleteFund}
+                onUpdateFund={updateFund}
               />
             } 
           />
 
-          {/* নোটিশ, শিক্ষক এবং অন্যান্য রাউট */}
           <Route path="/notice" element={
             <div className="container mx-auto p-10 text-center">
               <h1 className="text-3xl font-bold text-green-800">নোটিশ বোর্ড</h1>
