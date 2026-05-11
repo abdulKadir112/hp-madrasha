@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MadrashaFund from '../components/MadrashaFund';
-import MadrashaFundDashboard from '../components/MadrashaFundDashboard';
+import MadrashaFund from '../components/funds/MadrashaFund';
+import MadrashaFundDashboard from '../components/funds/MadrashaFundDashboard';
 import useMadrashaStore from '../lib/store';
 
 const Funds = () => {
